@@ -17,10 +17,10 @@ const upload = multer({ storage: storage });
 
 // Create database connection
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'profilezen2'
+  host: 'mysql-zhangruixiang.alwaysdata.net',
+  user: '371200',
+  password: 'T355g@rp3887',
+  database: 'zhangruixiang_237'
 });
 
 // Connect to the database

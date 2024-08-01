@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Reference</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .plus-icon-btn {
+            background: none;
+            border: none;
+            color: #0056b3;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .plus-icon-btn:hover {
+            color: #004494;
+        }
+        .btn-submit {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
+        <a class="navbar-brand" href="/">PortfolioZen</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+              
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container mt-5">
+        <h2>Add Reference</h2>
+        <form action="/add_ref" method="post" id="referenceForm">
+            <input type="hidden" name="profileId" value="<%= profileId %>">
+            <div id="referenceFields">
+                <div class="reference-entry">
+                    <div class="form-group">
+                        <label for="reference_name_0">Reference Name:</label>
+                        <input type="text" class="form-control" id="reference_name_0" name="reference_name[]" >
+                    </div>
+                    <div class="form-group">
+                        <label for="reference_phone_0">Phone Number:</label>
+                        <input type="text" class="form-control" id="reference_phone_0" name="reference_phone[]" >
+                    </div>
+                    <div class="form-group">
+                        <label for="reference_email_0">Email:</label>
+                        <input type="email" class="form-control" id="reference_email_0" name="reference_email[]" >
+                    </div>
+                    <div class="form-group">
+                        <label for="reference_relationship_0">Relationship:</label>
+                        <input type="text" class="form-control" id="reference_relationship_0" name="reference_relationship[]" >
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="plus-icon-btn" id="addReferenceButton"><i class="fas fa-plus-circle"></i></button>
+            <div class="btn-submit">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById('addReferenceButton').addEventListener('click', function() {
+            const referenceFields = document.getElementById('referenceFields');
+            const index = referenceFields.getElementsByClassName('reference-entry').length;
+            const newEntry = document.createElement('div');
+            newEntry.classList.add('reference-entry');
+            newEntry.innerHTML = `
+                <div class="form-group">
+                    <label for="reference_name_${index}">Reference Name:</label>
+                    <input type="text" class="form-control" id="reference_name_${index}" name="reference_name[]" required>
+                </div>
+                <div class="form-group">
+                    <label for="reference_phone_${index}">Phone Number:</label>
+                    <input type="text" class="form-control" id="reference_phone_${index}" name="reference_phone[]" required>
+                </div>
+                <div class="form-group">
+                    <label for="reference_email_${index}">Email:</label>
+                    <input type="email" class="form-control" id="reference_email_${index}" name="reference_email[]" required>
+                </div>
+                <div class="form-group">
+                    <label for="reference_relationship_${index}">Relationship:</label>
+                    <input type="text" class="form-control" id="reference_relationship_${index}" name="reference_relationship[]" required>
+                </div>
+            `;
+            referenceFields.appendChild(newEntry);
+        });
+    </script>
+</body>
+</html>

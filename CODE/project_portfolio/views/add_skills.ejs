@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Qualification</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
+        <a class="navbar-brand" href="/">PortfolioZen</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container mt-5">
+        <h2>Add Qualification</h2>
+        <form action="/submit-skills" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="profile_id" value="<%= profileId %>">
+            <div class="form-group">
+                <label for="skill_level">Qualification Level:</label>
+                <select class="form-control" id="skill_level" name="skill_level" onchange="checkSkillLevel(this.value)">
+                    <option value="">Select Qualification level</option>
+                    <option value="primary">PSLE Certification</option>
+                    <option value="secondary_o">GCE 'O' Level</option>
+                    <option value="secondary_na">GCE 'NA' Level</option>
+                    <option value="secondary_nt">GCE 'NT' Level</option>
+                    <option value="ite_nitec">NITEC</option>
+                    <option value="ite_hnitec">Higher-NITEC</option>
+                    <option value="poly">Diploma</option>
+                    <option value="uni">Bachelor</option>
+                    <option value="uni_m">Master</option>
+                    <option value="uni_dr">PhD</option>
+                </select>
+            </div>
+            <div class="form-group" id="psle_score_div" style="display:none;">
+                <label for="psle_score">PSLE Score:</label>
+                <input type="text" class="form-control" id="psle_score" name="psle_score">
+            </div>
+            <div class="form-group" id="olevel_scores_div" style="display:none;">
+                <label for="lrf4">L1R5 Score:</label>
+                <input type="text" class="form-control" id="l1r5" name="l1r5">
+                <label for="lrf3">L1R4 Score:</label>
+                <input type="text" class="form-control" id="l1r4" name="l1r4">
+            </div>
+            <div class="form-group" id="na_level_div" style="display:none;">
+                <label for="emb3">EMB3 Score:</label>
+                <input type="text" class="form-control" id="emb3" name="emb3">
+            </div>
+            <div class="form-group" id="nt_level_div" style="display:none;">
+                <label for="emb1">EMB1 Score:</label>
+                <input type="text" class="form-control" id="emb1" name="emb1">
+            </div>
+            <div class="form-group" id="hnitec_course_div" style="display:none;">
+                <label for="hnitec_course">Higher-NITEC Course:</label>
+                <input type="text" class="form-control" id="hnitec_course" name="hnitec_course">
+            </div>
+            <div class="form-group" id="hnitec_college_div" style="display:none;">
+                <label for="hnitec_college">ITE College:</label>
+                <select class="form-control" id="hnitec_college" name="hnitec_college" onchange="checkITECollege(this.value)">
+                    <option value="">Select ITE College</option>
+                    <option value="ITE College Central">ITE College Central</option>
+                    <option value="ITE College East">ITE College East</option>
+                    <option value="ITE College West">ITE College West</option>
+                </select>
+            </div>
+            <div class="form-group" id="hnitec_gpa_div" style="display:none;">
+                <label for="hnitec_gpa">GPA:</label>
+                <input type="text" class="form-control" id="hnitec_gpa" name="hnitec_gpa">
+            </div>
+            <div class="form-group" id="diploma_course_div" style="display:none;">
+                <label for="diploma_course">Diploma Course:</label>
+                <input type="text" class="form-control" id="diploma_course" name="diploma_course">
+            </div>
+            <div class="form-group" id="polytechnic_div" style="display:none;">
+                <label for="polytechnic">Polytechnic:</label>
+                <select class="form-control" id="polytechnic" name="polytechnic" onchange="checkPolytechnic(this.value)">
+                    <option value="">Select Polytechnic</option>
+                    <option value="Republic Polytechnic">Republic Polytechnic</option>
+                    <option value="Singapore Polytechnic">Singapore Polytechnic</option>
+                    <option value="Nanyang Polytechnic">Nanyang Polytechnic</option>
+                    <option value="Ngee Ann Polytechnic">Ngee Ann Polytechnic</option>
+                    <option value="Temasek Polytechnic">Temasek Polytechnic</option>
+                </select>
+            </div>
+            <div class="form-group" id="diploma_gpa_div" style="display:none;">
+                <label for="diploma_gpa">GPA:</label>
+                <input type="text" class="form-control" id="diploma_gpa" name="diploma_gpa">
+            </div>
+            <div class="form-group" id="bachelor_degree_name_div" style="display:none;">
+                <label for="bachelor_degree_name">Bachelor Degree Name:</label>
+                <input type="text" class="form-control" id="bachelor_degree_name" name="bachelor_degree_name">
+            </div>
+            <div class="form-group" id="university_div" style="display:none;">
+                <label for="university">University:</label>
+                <select class="form-control" id="university" name="university" onchange="checkUniversity(this.value)">
+                    <option value="">Select University</option>
+                    <option value="National University of Singapore (NUS)">National University of Singapore (NUS)</option>
+                    <option value="Nanyang Technology University (NTU)">Nanyang Technology University (NTU)</option>
+                    <option value="Singapore Institute of Technology (SIT)">Singapore Institute of Technology (SIT)</option>
+                    <option value="Singapore Management University (SMU)">Singapore Management University (SMU)</option>
+                    <option value="Singapore University of Technology and Design (SUTD)">Singapore University of Technology and Design (SUTD)</option>
+                    <option value="Singapore University of Social Sciences (SUSS)">Singapore University of Social Sciences (SUSS)</option>
+                </select>
+            </div>
+            <div class="form-group" id="gpa_div" style="display:none;">
+                <label for="gpa">GPA:</label>
+                <input type="text" class="form-control" id="gpa" name="gpa">
+            </div>
+            <div class="form-group" id="master_degree_name_div" style="display:none;">
+                <label for="master_degree_name">Master Degree Name:</label>
+                <input type="text" class="form-control" id="master_degree_name" name="master_degree_name">
+            </div>
+            <div class="form-group" id="master_university_div" style="display:none;">
+                <label for="master_university">University:</label>
+                <select class="form-control" id="master_university" name="master_university" onchange="checkUniversity(this.value)">
+                    <option value="">Select University</option>
+                    <option value="National University of Singapore (NUS)">National University of Singapore (NUS)</option>
+                    <option value="Nanyang Technology University (NTU)">Nanyang Technology University (NTU)</option>
+                    <option value="Singapore Institute of Technology (SIT)">Singapore Institute of Technology (SIT)</option>
+                    <option value="Singapore Management University (SMU)">Singapore Management University (SMU)</option>
+                    <option value="Singapore University of Technology and Design (SUTD)">Singapore University of Technology and Design (SUTD)</option>
+                    <option value="Singapore University of Social Sciences (SUSS)">Singapore University of Social Sciences (SUSS)</option>
+                </select>
+            </div>
+            <div class="form-group" id="master_gpa_div" style="display:none;">
+                <label for="master_gpa">GPA:</label>
+                <input type="text" class="form-control" id="master_gpa" name="master_gpa">
+            </div>
+            <div class="form-group" id="phd_degree_name_div" style="display:none;">
+                <label for="phd_degree_name">PhD Degree Name:</label>
+                <input type="text" class="form-control" id="phd_degree_name" name="phd_degree_name">
+            </div>
+            <div class="form-group" id="phd_university_div" style="display:none;">
+                <label for="phd_university">University:</label>
+                <select class="form-control" id="phd_university" name="phd_university" onchange="checkUniversity(this.value)">
+                    <option value="">Select University</option>
+                    <option value="National University of Singapore (NUS)">National University of Singapore (NUS)</option>
+                    <option value="Nanyang Technology University (NTU)">Nanyang Technology University (NTU)</option>
+                    <option value="Singapore Institute of Technology (SIT)">Singapore Institute of Technology (SIT)</option>
+                    <option value="Singapore Management University (SMU)">Singapore Management University (SMU)</option>
+                    <option value="Singapore University of Technology and Design (SUTD)">Singapore University of Technology and Design (SUTD)</option>
+                    <option value="Singapore University of Social Sciences (SUSS)">Singapore University of Social Sciences (SUSS)</option>
+                </select>
+            </div>
+            <div class="form-group" id="phd_gpa_div" style="display:none;">
+                <label for="phd_gpa">GPA:</label>
+                <input type="text" class="form-control" id="phd_gpa" name="phd_gpa">
+            </div>
+            <div class="form-group" id="nitec_course_div" style="display:none;">
+                <label for="nitec_course">NITEC Course:</label>
+                <input type="text" class="form-control" id="nitec_course" name="nitec_course">
+            </div>
+            <div class="form-group" id="ite_college_div" style="display:none;">
+                <label for="ite_college">ITE College:</label>
+                <select class="form-control" id="ite_college" name="ite_college" onchange="checkITECollege(this.value)">
+                    <option value="">Select ITE College</option>
+                    <option value="ITE College Central">ITE College Central</option>
+                    <option value="ITE College East">ITE College East</option>
+                    <option value="ITE College West">ITE College West</option>
+                </select>
+            </div>
+            <div class="form-group" id="nitec_gpa_div" style="display:none;">
+                <label for="nitec_gpa">GPA:</label>
+                <input type="text" class="form-control" id="nitec_gpa" name="nitec_gpa">
+            </div>
+            <div class="form-group" id="ite_logo_div" style="display:none;">
+                <img id="ite_logo" src="" alt="ITE College Logo" style="max-width: 200px; margin-top: 10px;">
+            </div>
+            <div class="form-group" id="poly_logo_div" style="display:none;">
+                <img id="poly_logo" src="" alt="Polytechnic Logo" style="max-width: 200px; margin-top: 10px;">
+            </div>
+            <div class="form-group" id="university_logo_div" style="display:none;">
+                <img id="university_logo" src="" alt="University Logo" style="max-width: 200px; margin-top: 10px;">
+            </div>
+            <div class="form-group">
+                <label for="qualification_image">Upload Qualification Image:</label>
+                <input type="file" class="form-control" id="qualification_image" name="qualification_image" >
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Next</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function checkSkillLevel(value) {
+            var psleScoreDiv = document.getElementById("psle_score_div");
+            var olevelScoresDiv = document.getElementById("olevel_scores_div");
+            var naLevelDiv = document.getElementById("na_level_div");
+            var ntLevelDiv = document.getElementById("nt_level_div");
+            var hnitecCourseDiv = document.getElementById("hnitec_course_div");
+            var hnitecCollegeDiv = document.getElementById("hnitec_college_div");
+            var hnitecGpaDiv = document.getElementById("hnitec_gpa_div");
+            var diplomaCourseDiv = document.getElementById("diploma_course_div");
+            var polytechnicDiv = document.getElementById("polytechnic_div");
+            var diplomaGpaDiv = document.getElementById("diploma_gpa_div");
+            var bachelorDegreeNameDiv = document.getElementById("bachelor_degree_name_div");
+            var universityDiv = document.getElementById("university_div");
+            var gpaDiv = document.getElementById("gpa_div");
+            var masterDegreeNameDiv = document.getElementById("master_degree_name_div");
+            var masterUniversityDiv = document.getElementById("master_university_div");
+            var masterGpaDiv = document.getElementById("master_gpa_div");
+            var phdDegreeNameDiv = document.getElementById("phd_degree_name_div");
+            var phdUniversityDiv = document.getElementById("phd_university_div");
+            var phdGpaDiv = document.getElementById("phd_gpa_div");
+            var nitecCourseDiv = document.getElementById("nitec_course_div");
+            var iteCollegeDiv = document.getElementById("ite_college_div");
+            var nitecGpaDiv = document.getElementById("nitec_gpa_div");
+            var iteLogoDiv = document.getElementById("ite_logo_div");
+            var polyLogoDiv = document.getElementById("poly_logo_div");
+            var universityLogoDiv = document.getElementById("university_logo_div");
+
+            psleScoreDiv.style.display = "none";
+            olevelScoresDiv.style.display = "none";
+            naLevelDiv.style.display = "none";
+            ntLevelDiv.style.display = "none";
+            hnitecCourseDiv.style.display = "none";
+            hnitecCollegeDiv.style.display = "none";
+            hnitecGpaDiv.style.display = "none";
+            diplomaCourseDiv.style.display = "none";
+            polytechnicDiv.style.display = "none";
+            diplomaGpaDiv.style.display = "none";
+            bachelorDegreeNameDiv.style.display = "none";
+            universityDiv.style.display = "none";
+            gpaDiv.style.display = "none";
+            masterDegreeNameDiv.style.display = "none";
+            masterUniversityDiv.style.display = "none";
+            masterGpaDiv.style.display = "none";
+            phdDegreeNameDiv.style.display = "none";
+            phdUniversityDiv.style.display = "none";
+            phdGpaDiv.style.display = "none";
+            nitecCourseDiv.style.display = "none";
+            iteCollegeDiv.style.display = "none";
+            nitecGpaDiv.style.display = "none";
+            iteLogoDiv.style.display = "none";
+            polyLogoDiv.style.display = "none";
+            universityLogoDiv.style.display = "none";
+
+            if (value === "primary") {
+                psleScoreDiv.style.display = "block";
+            } else if (value === "secondary_o") {
+                olevelScoresDiv.style.display = "block";
+            } else if (value === "secondary_na") {
+                naLevelDiv.style.display = "block";
+            } else if (value === "secondary_nt") {
+                ntLevelDiv.style.display = "block";
+            } else if (value === "ite_hnitec") {
+                hnitecCourseDiv.style.display = "block";
+                hnitecCollegeDiv.style.display = "block";
+                hnitecGpaDiv.style.display = "block";
+            } else if (value === "ite_nitec") {
+                nitecCourseDiv.style.display = "block";
+                iteCollegeDiv.style.display = "block";
+                nitecGpaDiv.style.display = "block";
+            } else if (value === "poly") {
+                diplomaCourseDiv.style.display = "block";
+                polytechnicDiv.style.display = "block";
+                diplomaGpaDiv.style.display = "block";
+            } else if (value === "uni") {
+                bachelorDegreeNameDiv.style.display = "block";
+                universityDiv.style.display = "block";
+                gpaDiv.style.display = "block";
+            } else if (value === "uni_m") {
+                masterDegreeNameDiv.style.display = "block";
+                masterUniversityDiv.style.display = "block";
+                masterGpaDiv.style.display = "block";
+            } else if (value === "uni_dr") {
+                phdDegreeNameDiv.style.display = "block";
+                phdUniversityDiv.style.display = "block";
+                phdGpaDiv.style.display = "block";
+            }
+        }
+
+        function checkITECollege(value) {
+            var iteLogo = document.getElementById("ite_logo");
+            var iteLogoDiv = document.getElementById("ite_logo_div");
+
+            if (value === "ITE College Central") {
+                iteLogo.src = "https://upload.wikimedia.org/wikipedia/en/d/dc/ITE_College_Central_Logo.jpg";
+                iteLogoDiv.style.display = "block";
+            } else if (value === "ITE College East") {
+                iteLogo.src = "https://upload.wikimedia.org/wikipedia/en/d/de/ITE_CE-SM_Logo.jpg";
+                iteLogoDiv.style.display = "block";
+            } else if (value === "ITE College West") {
+                iteLogo.src = "https://upload.wikimedia.org/wikipedia/commons/f/fc/ITE_CW_logo.JPG";
+                iteLogoDiv.style.display = "block";
+            } else {
+                iteLogoDiv.style.display = "none";
+            }
+        }
+
+        function checkPolytechnic(value) {
+            var polyLogo = document.getElementById("poly_logo");
+            var polyLogoDiv = document.getElementById("poly_logo_div");
+
+            if (value === "Republic Polytechnic") {
+                polyLogo.src = "https://upload.wikimedia.org/wikipedia/commons/8/80/Republic_Polytechnic_Logo.jpg";
+                polyLogoDiv.style.display = "block";
+            } else if (value === "Singapore Polytechnic") {
+                polyLogo.src = "https://upload.wikimedia.org/wikipedia/commons/d/d9/Singapore_Polytechnic_Crest.png";
+                polyLogoDiv.style.display = "block";
+            } else if (value === "Nanyang Polytechnic") {
+                polyLogo.src = "https://upload.wikimedia.org/wikipedia/en/thumb/c/c4/Nanyang_Polytechnic_logo.svg/2560px-Nanyang_Polytechnic_logo.svg.png";
+                polyLogoDiv.style.display = "block";
+            } else if (value === "Ngee Ann Polytechnic") {
+                polyLogo.src = "https://upload.wikimedia.org/wikipedia/en/0/00/Ngee_Ann_Polytechnic_logo.png";
+                polyLogoDiv.style.display = "block";
+            } else if (value === "Temasek Polytechnic") {
+                polyLogo.src = "https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Temasek_Polytechnic_logo.svg/2560px-Temasek_Polytechnic_logo.svg.png";
+                polyLogoDiv.style.display = "block";
+            } else {
+                polyLogoDiv.style.display = "none";
+            }
+        }
+
+        function checkUniversity(value) {
+            var universityLogo = document.getElementById("university_logo");
+            var universityLogoDiv = document.getElementById("university_logo_div");
+
+            if (value === "National University of Singapore (NUS)") {
+                universityLogo.src = "https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/NUS_coat_of_arms.svg/1024px-NUS_coat_of_arms.svg.png";
+                universityLogoDiv.style.display = "block";
+            } else if (value === "Nanyang Technology University (NTU)") {
+                universityLogo.src = "https://upload.wikimedia.org/wikipedia/en/thumb/f/f8/Nanyang_Technological_University_coat_of_arms_vector.svg/1024px-Nanyang_Technological_University_coat_of_arms_vector.svg.png";
+                universityLogoDiv.style.display = "block";
+            } else if (value === "Singapore Institute of Technology (SIT)") {
+                universityLogo.src = "https://upload.wikimedia.org/wikipedia/en/thumb/b/b2/SIT_logo_as_of_2024.svg/2560px-SIT_logo_as_of_2024.svg.png";
+                universityLogoDiv.style.display = "block";
+            } else if (value === "Singapore Management University (SMU)") {
+                universityLogo.src = "https://upload.wikimedia.org/wikipedia/en/thumb/3/37/Singapore_Management_University_logo.svg/2560px-Singapore_Management_University_logo.svg.png";
+                universityLogoDiv.style.display = "block";
+            } else if (value === "Singapore University of Technology and Design (SUTD)") {
+                universityLogo.src = "https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/Singapore_University_of_Technology_and_Design_logo.svg/2560px-Singapore_University_of_Technology_and_Design_logo.svg.png";
+                universityLogoDiv.style.display = "block";
+            } else if (value === "Singapore University of Social Sciences (SUSS)") {
+                universityLogo.src = "https://upload.wikimedia.org/wikipedia/en/thumb/5/50/SUSS_logo.svg/2560px-SUSS_logo.svg.png";
+                universityLogoDiv.style.display = "block";
+            } else {
+                universityLogoDiv.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

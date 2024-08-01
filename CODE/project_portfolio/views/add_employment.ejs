@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employment</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .plus-icon-btn {
+            background: none;
+            border: none;
+            color: #0056b3;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .plus-icon-btn:hover {
+            color: #004494;
+        }
+        .btn-submit {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
+        <a class="navbar-brand" href="/">PortfolioZen</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container mt-5">
+        <h2>Add Employment</h2>
+        <form action="/submit-employment" method="post" id="employmentForm">
+            <input type="hidden" name="profileId" value="<%= profileId %>">
+            <div id="employmentFields">
+                <div class="employment-entry">
+                    <div class="form-group">
+                        <label for="employment_start_0">From:</label>
+                        <input type="date" class="form-control" id="employment_start_0" name="employment_start[]" >
+                    </div>
+                    <div class="form-group">
+                        <label for="employment_end_0">To:</label>
+                        <input type="date" class="form-control" id="employment_end_0" name="employment_end[]" >
+                    </div>
+                    <div class="form-group">
+                        <label for="company_name_0">Company Name:</label>
+                        <input type="text" class="form-control" id="company_name_0" name="company_name[]" >
+                    </div>
+                    <div class="form-group">
+                        <label for="position_0">Position:</label>
+                        <input type="text" class="form-control" id="position_0" name="position[]" >
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="plus-icon-btn" id="addCompanyButton"><i class="fas fa-plus-circle"></i></button>
+            <div class="btn-submit">
+                <button type="submit" class="btn btn-primary">Next</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById('addCompanyButton').addEventListener('click', function() {
+            const employmentFields = document.getElementById('employmentFields');
+            const index = employmentFields.getElementsByClassName('employment-entry').length;
+            const newEntry = document.createElement('div');
+            newEntry.classList.add('employment-entry');
+            newEntry.innerHTML = `
+                <div class="form-group">
+                    <label for="employment_start_${index}">From:</label>
+                    <input type="date" class="form-control" id="employment_start_${index}" name="employment_start[]" required>
+                </div>
+                <div class="form-group">
+                    <label for="employment_end_${index}">To:</label>
+                    <input type="date" class="form-control" id="employment_end_${index}" name="employment_end[]" required>
+                </div>
+                <div class="form-group">
+                    <label for="company_name_${index}">Company Name:</label>
+                    <input type="text" class="form-control" id="company_name_${index}" name="company_name[]" required>
+                </div>
+                <div class="form-group">
+                    <label for="position_${index}">Position:</label>
+                    <input type="text" class="form-control" id="position_${index}" name="position[]" required>
+                </div>
+            `;
+            employmentFields.appendChild(newEntry);
+        });
+    </script>
+</body>
+</html>

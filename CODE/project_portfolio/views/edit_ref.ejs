@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Reference</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Edit Reference</h2>
+        <form action="/edit_reference/<%= reference.id %>" method="post">
+            <div class="form-group">
+                <label for="reference_name">Reference Name:</label>
+                <input type="text" class="form-control" id="reference_name" name="reference_name" value="<%= reference.reference_name %>" required>
+            </div>
+            <div class="form-group">
+                <label for="reference_phone">Phone Number:</label>
+                <input type="text" class="form-control" id="reference_phone" name="reference_phone" value="<%= reference.reference_phone %>" required>
+            </div>
+            <div class="form-group">
+                <label for="reference_email">Email:</label>
+                <input type="email" class="form-control" id="reference_email" name="reference_email" value="<%= reference.reference_email %>" required>
+            </div>
+            <div class="form-group">
+                <label for="reference_relationship">Relationship:</label>
+                <input type="text" class="form-control" id="reference_relationship" name="reference_relationship" value="<%= reference.reference_relationship %>" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

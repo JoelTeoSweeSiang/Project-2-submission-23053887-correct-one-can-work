@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Employment</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Edit Employment</h2>
+        <form action="/edit_employment/<%= employment.id %>" method="post">
+            <div class="form-group">
+                <label for="company_name">Company Name:</label>
+                <input type="text" class="form-control" id="company_name" name="company_name" value="<%= employment.company_name %>" required>
+            </div>
+            <div class="form-group">
+                <label for="position">Position:</label>
+                <input type="text" class="form-control" id="position" name="position" value="<%= employment.position %>" required>
+            </div>
+            <div class="form-group">
+                <label for="employment_start">Start Date:</label>
+                <input type="date" class="form-control" id="employment_start" name="employment_start" value="<%= employment.employment_start %>" required>
+            </div>
+            <div class="form-group">
+                <label for="employment_end">End Date:</label>
+                <input type="date" class="form-control" id="employment_end" name="employment_end" value="<%= employment.employment_end %>" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

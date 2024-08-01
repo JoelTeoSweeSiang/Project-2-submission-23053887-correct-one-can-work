@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Skill</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Edit Skill</h2>
+        <form action="/edit_skill/<%= skill.id %>" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="skill_level">Skill Level:</label>
+                <input type="text" class="form-control" id="skill_level" name="skill_level" value="<%= skill.skill_level %>" required>
+            </div>
+            <div class="form-group">
+                <label for="qualification_image">Qualification Image:</label>
+                <input type="file" class="form-control-file" id="qualification_image" name="qualification_image">
+                <img src="<%= skill.qualification_image.replace('uploads\\', '/uploads/') %>" alt="Skill Image" width="100">
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

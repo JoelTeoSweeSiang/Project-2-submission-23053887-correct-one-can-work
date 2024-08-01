@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Data Overview</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        .table {
+            margin-top: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+        .container {
+            padding-top: 20px;
+        }
+        img {
+            width: 60px; /* Sets a standard width for all images */
+            height: auto; /* Maintains aspect ratio */
+            border-radius: 30%; /* Optionally rounds the corners */
+            cursor: pointer; /* Indicates the image is clickable */
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-around;
+        }
+        .modal-content {
+            max-width: 90%;
+        }
+        #modalImage {
+            width: 500px; /* Set a larger width for the modal image */
+            height: auto; /* Maintains aspect ratio */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <a class="navbar-brand" href="/">PortfolioZen</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="mt-4">Profiles</h1>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% profiles.forEach(function(profile) { %>
+                    <tr>
+                        <td><img src="<%= profile.picture_path.replace('uploads\\', '/uploads/') %>" alt="Profile Image" class="enlarge-img"></td>
+                        <td><%= profile.name %></td>
+                        <td><%= profile.email %></td>
+                        <td><%= profile.phone_number %></td>
+                        <td><%= profile.address %></td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="/edit_profile/<%= profile.id %>" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="/delete_profile/<%= profile.id %>" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <h1>Employment History</h1>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Company</th>
+                    <th>Position</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% employmentHistory.forEach(function(job) { %>
+                    <tr>
+                        <td><%= job.company_name %></td>
+                        <td><%= job.position %></td>
+                        <td><%= job.employment_start %></td>
+                        <td><%= job.employment_end %></td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="/edit_employment/<%= job.id %>" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="/delete_employment/<%= job.id %>" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <h1>References</h1>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Relationship</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% references.forEach(function(ref) { %>
+                    <tr>
+                        <td><%= ref.reference_name %></td>
+                        <td><%= ref.reference_email %></td>
+                        <td><%= ref.reference_phone %></td>
+                        <td><%= ref.reference_relationship %></td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="/edit_reference/<%= ref.id %>" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="/delete_reference/<%= ref.id %>" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <h1>Skills</h1>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>Skill Level</th>
+                    <th>Details</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% skills.forEach(function(skill) { %>
+                    <tr>
+                        <td><img src="<%= skill.qualification_image.replace('uploads\\', '/uploads/') %>" alt="Skill Image" class="enlarge-img"></td>
+                        <td><%= skill.skill_level %></td>
+                        <td>Various details</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="/edit_skill/<%= skill.id %>" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="/delete_skill/<%= skill.id %>" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Image</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" alt="Enlarged Image" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.enlarge-img');
+            images.forEach(image => {
+                image.addEventListener('click', function() {
+                    const src = this.src;
+                    const modalImage = document.getElementById('modalImage');
+                    modalImage.src = src;
+                    $('#imageModal').modal('show');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

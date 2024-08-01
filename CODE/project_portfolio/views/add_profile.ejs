@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Qualification</title>
+    <!-- Include Bootstrap CSS (Assuming Bootstrap 4.x) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            margin-bottom: 10px;
+            color: #666;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #004494;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
+        <a class="navbar-brand" href="/">PortfolioZen</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+               
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Enter Profile</h1>
+        <form action="/add-profile" method="POST" enctype="multipart/form-data">
+            <div>
+                <label for="firstInput">Name:</label>
+                <input type="text" id="firstInput" name="name" >
+            </div>
+            <div>
+                <label for="secondInput">Insert Picture of yourself:</label>
+                <input type="file" id="secondInput" name="picture_path" accept="image/*" >
+            </div>
+            <div>
+                <label for="thirdInput">Phone Number:</label>
+                <input type="text" id="thirdInput" name="phoneNumber" >
+            </div>
+            <div>
+                <label for="fourthInput">Address:</label>
+                <input type="text" id="fourthInput" name="address" >
+            </div>
+            <div>
+                <label for="fifthInput">Email:</label>
+                <input type="text" id="fifthInput" name="email" >
+            </div>
+            <button type="submit">Next</button>
+            <!-- <button type="submit">Submit</button>  -->
+        </form>
+    </div>
+    <!-- Include Bootstrap JS and its dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
